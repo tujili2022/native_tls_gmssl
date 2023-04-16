@@ -1,23 +1,22 @@
-# rust-native-tls
+# native-tls-gmssl
 
-[Documentation](https://docs.rs/native-tls)
+[Documentation](https://docs.rs/native-tls-gmssl)
 
 An abstraction over platform-specific TLS implementations.
 
 Specifically, this crate uses SChannel on Windows (via the [`schannel`] crate),
 Secure Transport on macOS (via the [`security-framework`] crate), and OpenSSL (via
-the [`openssl`] crate) on all other platforms.
+the [`gmssl`] crate) on all other platforms.
 
 [`schannel`]: https://crates.io/crates/schannel
 [`security-framework`]: https://crates.io/crates/security-framework
-[`openssl`]: https://crates.io/crates/openssl
 
 ## Installation
 
 ```toml
 # Cargo.toml
 [dependencies]
-native-tls = "0.2"
+native-tls-gmssl = "0.2"
 ```
 
 ## Usage
@@ -88,7 +87,7 @@ fn main() {
 
 # License
 
-`rust-native-tls` is primarily distributed under the terms of both the MIT
+`native-tls-gmssl` is primarily distributed under the terms of both the MIT
 license and the Apache License (Version 2.0), with portions covered by various
 BSD-like licenses.
 
