@@ -11,8 +11,8 @@ readme = "README.md"
 features = ["alpn"]
 rustdoc-args = ["--cfg", "docsrs"]
 
-# [features]
-# vendored = ["gmssl/vendored"]
+[features]
+vendored = ["gmssl/vendored"]
 
 
 [target.'cfg(any(target_os = "windows", target_os = "macos", target_os = "ios"))'.dependencies]
