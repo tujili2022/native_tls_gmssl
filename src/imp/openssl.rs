@@ -293,7 +293,7 @@ impl TlsConnector {
 
         for cert in &builder.root_certificates {
             if let Err(err) = connector.cert_store_mut().add_cert((cert.0).0.clone()) {
-                debug!("add_cert error: {:?}", err);
+               print!("add_cert error: {:?}", err);
             }
         }
 
