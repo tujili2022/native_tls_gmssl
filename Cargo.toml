@@ -18,7 +18,7 @@ rustdoc-args = ["--cfg", "docsrs"]
 [target.'cfg(any(target_os = "windows", target_os = "macos", target_os = "ios"))'.dependencies]
 log = "0.4.5"
  gmssl = "0.1"
-# gmssl-sys = "0.1"
+ gmssl-sys = "0.1"
 lazy_static = "1.4"
 openssl-probe = "0.1"
 
