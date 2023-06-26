@@ -274,8 +274,7 @@ impl TlsConnector {
     pub fn new(builder: &TlsConnectorBuilder) -> Result<TlsConnector, Error> {
         init_trust();
 
-        let mut connector = SslConnector::builder(SslMethod::tls())?;
-        connector.set_ciphersuites("GMTLS_SM2DHE_WITH_SMS4_SM3:GMTLS_SM2_WITH_SMS4_SM3").unwrap();
+        let mut connector = SslConnector::builder(SslMethod::gm_tls_client())?;
         if let Some(ref identity) = builder.identity {
             connector.set_certificate(&identity.0.cert)?;
             connector.set_private_key(&identity.0.pkey)?;
