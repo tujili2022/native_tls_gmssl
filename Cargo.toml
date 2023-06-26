@@ -17,8 +17,8 @@ vendored = ["gmssl/vendored"]
 
 [target.'cfg(any(target_os = "windows", target_os = "macos", target_os = "ios"))'.dependencies]
 log = "0.4.5"
- gmssl = {version = "0.1",features = ["ossl111"]}
- gmssl-sys =  {version = "0.1",features = ["ossl111"]}
+ gmssl = {git ="https://github.com/tujili2022/rust-gmssl.git", version = "0.1"}
+ gmssl-sys =   {git ="https://github.com/tujili2022/rust-gmssl.git", version = "0.1"}
 lazy_static = "1.4"
 openssl-probe = "0.1"
 
