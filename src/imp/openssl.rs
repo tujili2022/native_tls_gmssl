@@ -274,51 +274,7 @@ impl TlsConnector {
     pub fn new(builder: &TlsConnectorBuilder) -> Result<TlsConnector, Error> {
         init_trust();
 
-        let mut connector = SslConnector::builder(SslMethod::tls())?;
-        if let Some(ref identity) = builder.identity {
-            connector.set_certificate(&identity.0.cert)?;
-            connector.set_private_key(&identity.0.pkey)?;
-            for cert in identity.0.chain.iter() {
-                // https://www.openssl.org/docs/manmaster/man3/SSL_CTX_add_extra_chain_cert.html
-                // specifies that "When sending a certificate chain, extra chain certificates are
-                // sent in order following the end entity certificate."
-                connector.add_extra_chain_cert(cert.to_owned())?;
-            }
-        }
-        supported_protocols(builder.min_protocol, builder.max_protocol, &mut connector)?;
-
-        if builder.disable_built_in_roots {
-            connector.set_cert_store(X509StoreBuilder::new()?.build());
-        }
-
-        for cert in &builder.root_certificates {
-            if let Err(err) = connector.cert_store_mut().add_cert((cert.0).0.clone()) {
-               print!("add_cert error: {:?}", err);
-            }
-        }
-
-        #[cfg(feature = "alpn")]
-        {
-            if !builder.alpn.is_empty() {
-                // Wire format is each alpn preceded by its length as a byte.
-                let mut alpn_wire_format = Vec::with_capacity(
-                    builder
-                        .alpn
-                        .iter()
-                        .map(|s| s.as_bytes().len())
-                        .sum::<usize>()
-                        + builder.alpn.len(),
-                );
-                for alpn in builder.alpn.iter().map(|s| s.as_bytes()) {
-                    alpn_wire_format.push(alpn.len() as u8);
-                    alpn_wire_format.extend(alpn);
-                }
-                connector.set_alpn_protos(&alpn_wire_format)?;
-            }
-        }
-
-        #[cfg(target_os = "android")]
-        load_android_root_certs(&mut connector)?;
+        let mut connector = SslConnector::builder(SslMethod::gm_tls())?;
 
         Ok(TlsConnector {
             connector: connector.build(),
